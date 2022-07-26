@@ -1,8 +1,9 @@
 # timeToSentence
 ## Frontend and Backend are in their respective Branches.
 
-## Frontend
-https://github.com/nsniteshsonal37/timeToSentence/tree/FrontEnd
+## Hosted at http://43.205.140.136/
 
+## Frontend
+https://github.com/nsniteshsonal37/timeToSentence/tree/frontend/
 ## Backend
-https://github.com/nsniteshsonal37/timeToSentence/tree/backend
+https://github.com/nsniteshsonal37/timeToSentence/tree/backend/
