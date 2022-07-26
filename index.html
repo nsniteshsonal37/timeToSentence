@@ -75,7 +75,6 @@
 
 
                 postApi(hours,minute)
-                console.log(hours);
                }) 
                $("#minute").change(function(){
                 var hours = $("#hour").val();
@@ -88,10 +87,9 @@
                }) 
                function postApi(hour,minute){
                    var time = hour +':' + minute
-                   $.post("http://127.0.0.1:5000/post",{time: time})
-                   $.get("http://127.0.0.1:5000/",function(data){
+                   $.post("http://65.0.17.95/post",{time: time})
+                   $.get("http://65.0.17.95/get",function(data){
                        var str=data.time;
-                        console.log("Output", str)
                         $("#output").animate({'opacity' : 0 }, 400, function()
                         {$(this).html(str).animate({'opacity': 1}, 400)}); 
                    })
