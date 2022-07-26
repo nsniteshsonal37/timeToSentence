@@ -24,13 +24,9 @@ app.add_middleware(
 class Time(BaseModel):
     time: str
 
-global initVar
-initVar=1
 @app.post("/post")
 def postF(time: str=Form()):
     global inputTime, var
-    global initVar
-    initVar=0
     inputTime=time
     var=re.match(regex,inputTime)
     print(initVar)
@@ -40,9 +36,11 @@ def postF(time: str=Form()):
         return{"Status":"Regex Fail"}
 @app.get("/")
 def root():
-    print(initVar)
-    if(initVar==1):
-        return{"Status": "API Launched"}
+    return{"Status": "API Launched"}
+@app.get("/get")
+def root():
+
+        
     if(var):
         return{"time": out(inputTime)}
     else:
