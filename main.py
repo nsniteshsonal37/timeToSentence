@@ -29,7 +29,6 @@ def postF(time: str=Form()):
     global inputTime, var
     inputTime=time
     var=re.match(regex,inputTime)
-    print(initVar)
     if(var):
         return{"Status":"Received"}
     else:
@@ -40,7 +39,6 @@ def root():
 @app.get("/get")
 def root():
 
-        
     if(var):
         return{"time": out(inputTime)}
     else:
