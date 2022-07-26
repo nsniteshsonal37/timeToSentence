@@ -1,8 +1,9 @@
+from dataclasses import InitVar
 from fastapi import FastAPI, Form
 import uvicorn
 from pydantic import BaseModel
-from fastapi.middleware.cors import CORSMiddleware
 from runner import *
+from fastapi.middleware.cors import CORSMiddleware
 import re
 
 app=FastAPI() 
@@ -23,9 +24,12 @@ app.add_middleware(
 class Time(BaseModel):
     time: str
 
+global initVar
+initVar=1
 @app.post("/post")
 def postF(time: str=Form()):
     global inputTime, var
+    initVar=0
     inputTime=time
     var=re.match(regex,inputTime)
     if(var):
@@ -34,6 +38,8 @@ def postF(time: str=Form()):
         return{"Status":"Regex Fail"}
 @app.get("/")
 def root():
+    if(initVar==1):
+        return{"Status": "API Launched"}
     if(var):
         return{"time": out(inputTime)}
     else:
