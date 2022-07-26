@@ -29,15 +29,18 @@ initVar=1
 @app.post("/post")
 def postF(time: str=Form()):
     global inputTime, var
+    global initVar
     initVar=0
     inputTime=time
     var=re.match(regex,inputTime)
+    print(initVar)
     if(var):
         return{"Status":"Received"}
     else:
         return{"Status":"Regex Fail"}
 @app.get("/")
 def root():
+    print(initVar)
     if(initVar==1):
         return{"Status": "API Launched"}
     if(var):
@@ -45,5 +48,5 @@ def root():
     else:
         return{"Status":"Regex Fail"}
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", port=5000, log_level="info", reload=True)
+# if __name__ == "__main__":
+#     uvicorn.run("main:app", port=5000, log_level="info", reload=True)
