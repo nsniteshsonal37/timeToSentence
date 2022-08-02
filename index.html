@@ -34,7 +34,7 @@
                 id="hour"
                 placeholder="HH"
                 min="0"
-                max="12"
+                max="24"
                 value="00"
                 pattern = "\b(0*(?:[1-9][0-9]?|59))\b"
                 title="Three letter country code"
@@ -63,39 +63,56 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         <script>
+
             $(document).ready(function(){
                 postApi(0,0);
-               $("#hour").change(function(){
-                var hours = $("#hour").val();
+                const debounce = (func, delay = 200) => {
+  let timeoutId;
+
+  return function() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, arguments);
+    }, delay);
+  }
+};
+
+function fun1(evt) {
+    var hours = $("#hour").val();
                 var minute = $("#minute").val();
-                if(hours < 0 || hours > 12){
+                if(hours < 0 || hours > 24){
                 alert("enter valid hour range")
                 return;
                 }
+                
 
 
                 postApi(hours,minute)
+}
+
+const debounced = debounce(fun1, 500);
+
+               $("#hour").change(function(){
+                debounced();
                }) 
                $("#minute").change(function(){
-                var hours = $("#hour").val();
-                var minute = $("#minute").val();
-                if(minute < 0 || minute > 59){
-                alert("enter valid minute range")
-                return;
-                }
-                postApi(hours,minute)
-               }) 
+                   debounced();
+               })
                function postApi(hour,minute){
                    var time = hour +':' + minute
-                   $.post("http://65.0.17.95/post",{time: time})
-                   $.get("http://65.0.17.95/get",function(data){
-                       var str=data.time;
-                        $("#output").animate({'opacity' : 0 }, 400, function()
-                        {$(this).html(str).animate({'opacity': 1}, 400)}); 
-                   })
+                   $.post("http://127.0.0.1:5000/post",{time: time})
+                   fetch('http://127.0.0.1:5000/get').then((response) => response.json()).then((data) => get(data)  );
+
+               }
+               function get(data){
+                        
+                var str=data.time;
+                $("#output").animate({'opacity' : 0 }, 400, function()
+                {$(this).html(str).animate({'opacity': 1}, 400)}); 
+                  
+                
                }
             });
         </script>
-        <script>
-    </body>
+        </body>
 </html>
