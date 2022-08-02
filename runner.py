@@ -10,11 +10,13 @@ def out(x):
     if(s1==0):
         s1=12
     if(s1>12 and s1<25):
-        s1=int(s1/2)
+        s1=int(s1-12)
     if(s1>24):
-        return ("A day only has 24 hours! Please provide valid input!")
+        s1=int(s1%24)
     if(s2>60):
-        return("An hour only has 60 minutes!")
+        s1+=int(s2/60)
+        s2=int(s2%60)
+
     if(s2<0):
         return("An hour can't have negative minutes!")
     elif(s2==0):
@@ -43,3 +45,5 @@ def out(x):
         return (f"{num2string(60-s2)} minutes to {num2string(s1+1)}")
     elif(s2<30):
         return (f"{num2string(s2)} minutes past {num2string(s1)}")
+
+print(out("15:00"))
