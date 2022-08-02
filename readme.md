@@ -4,5 +4,5 @@ ____
 * ```pip install -r requirements```
 * ```python3 main.py```
 
-## Deployed at http://65.0.17.95/
-Use http://65.0.17.95/docs to test.
+## Deployed at http://3.108.193.82/
+Use http://3.108.193.82/docs to test.
