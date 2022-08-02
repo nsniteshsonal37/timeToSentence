@@ -19,8 +19,8 @@ app.add_middleware(
 )
 
 
-class Time(BaseModel):
-    time: str
+# class Time(BaseModel):
+#     time: str
 
 @app.post("/post")
 def postF(time: str=Form()):
